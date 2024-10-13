@@ -1,12 +1,12 @@
 "use client";
 
 import { useFormState } from "react-dom";
-import { ChevronDown, ChevronRight } from "lucide-react";
 
 import { Task } from "@/lib/types";
-import { Button } from "@/components/ui/button";
 import { updateTask } from "@/app/actions/task";
 import { FORM_ACTION_RESULT } from "@/lib/constants";
+import SubmitButton from "./ui/submit-button";
+import { ChevronDownIcon, ChevronRightIcon, SpinnerIcon } from "@/app/assets";
 
 export default function ExpandTaskForm({ task }: { task: Task }) {
   const [, dispatchUpdate] = useFormState(updateTask, FORM_ACTION_RESULT);
@@ -19,19 +19,22 @@ export default function ExpandTaskForm({ task }: { task: Task }) {
         name="active"
         value={task.active ? "false" : "true"}
       />
-      <Button
+      <SubmitButton
         type="submit"
         variant="ghost"
         size="icon"
         aria-label={task.active ? "Collapse subtasks" : "Expand subtasks"}
-        className="mr-2"
       >
-        {task.active ? (
-          <ChevronDown className="w-5 h-5" />
-        ) : (
-          <ChevronRight className="w-5 h-5" />
-        )}
-      </Button>
+        {(pending) =>
+          pending ? (
+            <SpinnerIcon />
+          ) : task.active ? (
+            <ChevronDownIcon className="w-5 h-5" />
+          ) : (
+            <ChevronRightIcon className="w-5 h-5" />
+          )
+        }
+      </SubmitButton>
     </form>
   );
 }

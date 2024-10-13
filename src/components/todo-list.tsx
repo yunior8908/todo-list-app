@@ -27,7 +27,11 @@ export function TodoList({
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <AddTaskForm buttonLabel="Add Task" owner={username} />
+        <AddTaskForm
+          buttonLabel="Add Task"
+          pendingButtonLabel="Adding..."
+          owner={username}
+        />
 
         <AnimatePresence>
           {tasks?.map((task) => (
@@ -100,6 +104,7 @@ export function TodoList({
                       </ul>
                       <AddTaskForm
                         buttonLabel="Add"
+                        pendingButtonLabel="Adding..."
                         owner={username}
                         parent={task.id}
                       />

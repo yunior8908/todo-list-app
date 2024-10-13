@@ -2,11 +2,11 @@
 import { useFormState } from "react-dom";
 import { motion } from "framer-motion";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { signUpNewUser } from "@/app/actions/auth";
 import { FORM_ACTION_RESULT } from "@/lib/constants";
 import { SetStateType } from "@/lib/types";
+import SubmitButton from "@/components/ui/submit-button";
 
 export default function SignUpPage({
   setPage,
@@ -43,14 +43,14 @@ export default function SignUpPage({
           className="max-w-md"
         />
         <div className="flex gap-4 justify-between">
-          <Button className="bg-black text-white font-bold py-2 px-4 w-fit rounded transition-all duration-300">
-            Sign up
-          </Button>
+          <SubmitButton className="bg-black text-white font-bold py-2 px-4 w-fit rounded transition-all duration-300">
+            {(pending) => (pending ? "Loading..." : "Sign up")}
+          </SubmitButton>
           <button
-            className="underline text-sm h-fit"
+            className="underline text-sm h-fit underline-offset-2 text-blue-700"
             onClick={() => setPage("sign-in")}
           >
-            <strong>Sign In</strong>
+            <strong>Login</strong>
           </button>
         </div>
       </form>

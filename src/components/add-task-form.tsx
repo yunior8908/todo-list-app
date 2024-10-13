@@ -1,19 +1,21 @@
 "use client";
 import { useRef } from "react";
 import { useFormState } from "react-dom";
-import { Plus } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import SubmitButton from "@/components/ui/submit-button";
 import { createTask } from "@/app/actions/task";
 import { FORM_ACTION_RESULT } from "@/lib/constants";
+import { PlusIcon } from "@/app/assets";
 
 export default function AddTaskForm({
   buttonLabel,
+  pendingButtonLabel,
   owner,
   parent,
 }: {
   buttonLabel: string;
+  pendingButtonLabel: string;
   owner: string;
   parent?: string;
 }) {
@@ -37,13 +39,17 @@ export default function AddTaskForm({
         placeholder="Add a new task"
         className="mr-4 flex-grow"
       />
-      <Button
+      <SubmitButton
         type="submit"
         className="bg-black text-white font-bold py-2 px-4 rounded transition-all duration-300"
       >
-        <Plus className="w-5 h-5 mr-2" />
-        {buttonLabel}
-      </Button>
+        {(pending) => (
+          <>
+            <PlusIcon className="w-5 h-5 mr-2" />
+            {pending ? pendingButtonLabel : buttonLabel}
+          </>
+        )}
+      </SubmitButton>
     </form>
   );
 }
