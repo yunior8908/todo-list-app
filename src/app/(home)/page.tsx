@@ -21,6 +21,7 @@ export default async function Home({
     .from("todo-tb")
     .select()
     .eq("owner", username)
+    .order("order", { ascending: true })
     .order("created_at", { ascending: false })
     .returns<Task[]>();
 

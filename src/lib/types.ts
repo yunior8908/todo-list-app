@@ -8,6 +8,7 @@ export type Task = {
   description: string;
   completed: boolean;
   active: boolean;
+  order: number;
 };
 
 export type TaskWithSubtasks = Task & {
