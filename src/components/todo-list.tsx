@@ -8,6 +8,7 @@ import CompleteToggleForm from "@/components/complete-toggle-form";
 import DeleteTaskForm from "@/components/delete-task-form";
 import ExpandTaskForm from "@/components/expand-task-form";
 import MotionWrapper from "@/components/ui/motion-wrapper";
+import { CalendarInput } from "@/components/ui/calendar";
 import { TaskWithSubtasks } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -35,22 +36,27 @@ export function TodoList({
               { "bg-gray-300": task.active && task.parent === null }
             )}
           >
-            <div className="flex items-center justify-between">
-              <div className="flex items-start">
-                <CompleteToggleForm task={task} />
-                <span
-                  className={`text-lg ${
-                    task.completed
-                      ? "line-through text-gray-500"
-                      : "text-gray-800"
-                  }`}
-                >
-                  {task.description}
-                </span>
+            <div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <CompleteToggleForm task={task} />
+                  <span
+                    className={`text-lg ${
+                      task.completed
+                        ? "line-through text-gray-500"
+                        : "text-gray-800"
+                    }`}
+                  >
+                    {task.description}
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  {task.parent === null ? <ExpandTaskForm task={task} /> : null}
+                  <DeleteTaskForm task={task} />
+                </div>
               </div>
-              <div className="flex items-center">
-                {task.parent === null ? <ExpandTaskForm task={task} /> : null}
-                <DeleteTaskForm task={task} />
+              <div className="w-fit ml-auto ">
+                <CalendarInput label="" name="start-date" />
               </div>
             </div>
             {task.parent === null ? (
@@ -71,24 +77,31 @@ export function TodoList({
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0, x: 20 }}
                           transition={{ duration: 0.2 }}
-                          className="flex items-center justify-between bg-white p-2 rounded-md shadow-sm"
+                          className="bg-white p-2 rounded-md shadow-sm"
                         >
-                          <div className="flex items-center">
-                            <CompleteToggleForm task={subtask} />
-                            <span
-                              className={`${
-                                subtask.completed
-                                  ? "line-through text-gray-500"
-                                  : "text-gray-800"
-                              }`}
-                            >
-                              {subtask.description}
-                            </span>
+                          <div className="flex gap-4 justify-between">
+                            <div className="flex items-center">
+                              <CompleteToggleForm task={subtask} />
+
+                              <span
+                                className={`${
+                                  subtask.completed
+                                    ? "line-through text-gray-500"
+                                    : "text-gray-800"
+                                }`}
+                              >
+                                {subtask.description}
+                              </span>
+                            </div>
+                            <DeleteTaskForm task={subtask} />
                           </div>
-                          <DeleteTaskForm task={subtask} />
+                          <div className="w-fit ml-auto ">
+                            <CalendarInput label="" name="start-date" />
+                          </div>
                         </motion.li>
                       ))}
                     </ul>
+
                     <AddTaskForm
                       buttonLabel="Add"
                       pendingButtonLabel="Adding..."

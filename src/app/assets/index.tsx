@@ -8,6 +8,8 @@ export {
   Circle as CircleIcon,
   Trash2 as Trash2Icon,
   LogOut as LogOutIcon,
+  Calendar as CalendarIcon,
+  ChevronLeft as ChevronLeftIcon,
 } from "lucide-react";
 
 export function SpinnerIcon(props: React.ComponentProps<"svg">) {
