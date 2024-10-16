@@ -38,6 +38,7 @@ export default function AddTaskForm({
         name="text"
         placeholder="Add a new task"
         className="mr-4 flex-grow"
+        required
       />
       <SubmitButton
         type="submit"

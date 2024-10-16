@@ -61,7 +61,7 @@ export async function deleteTask(prevState: object, formData: FormData) {
 
   const { data, error } = await supabase
     .from("todo-tb")
-    .delete()
+    .update({ deprecated: true })
     .eq("id", parseInt(id));
 
   if (!error) {

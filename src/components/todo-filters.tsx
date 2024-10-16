@@ -44,6 +44,12 @@ export default function TodoFilters() {
         >
           Completed
         </Button>
+        <Button
+          onClick={() => setFilter("deprecated")}
+          variant={view === "deprecated" ? "default" : "outline"}
+        >
+          Deprecated
+        </Button>
       </div>
     </motion.div>
   );

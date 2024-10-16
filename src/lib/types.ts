@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 
-export type FilterType = "active" | "completed" | "all";
+export type FilterType = "active" | "completed" | "all" | "deprecated";
 
 export type Task = {
   id: string;
