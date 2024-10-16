@@ -63,7 +63,7 @@ export function TodoList({
                     transition={{ duration: 0.3 }}
                     className="ml-8 mt-2"
                   >
-                    <ul className="space-y-2 mb-2">
+                    <ul className="space-y-2 mb-4">
                       {task?.subtasks?.map((subtask) => (
                         <motion.li
                           key={subtask.id}
