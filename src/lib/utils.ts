@@ -16,15 +16,20 @@ export function formatTasks(tasks: Task[]): {
 
   const childTasks = tasks.filter((task) => task.parent !== null);
 
-  parentTasks.forEach((parentTask) => {
-    for (let i = 0; i < childTasks.length; i++) {
-      if (childTasks[i].parent === parentTask.id) {
-        parentTask.subtasks ??= [];
-        parentTask.subtasks.push(childTasks[i]);
-        childTasks.splice(i, 1);
-      }
+  const deprecatedTasks: Task[] = [];
+
+  childTasks.forEach((childTask) => {
+    const parent = parentTasks.find(
+      (parentTask) => parentTask.id === childTask.parent
+    );
+
+    if (parent) {
+      parent.subtasks ??= [];
+      parent.subtasks.push(childTask);
+    } else {
+      deprecatedTasks.push(childTask);
     }
   });
 
-  return { parentTasks, deprecatedTasks: childTasks };
+  return { parentTasks, deprecatedTasks };
 }
